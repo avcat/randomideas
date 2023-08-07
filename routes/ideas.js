@@ -1,4 +1,5 @@
 import express from 'express';
+
 const router = express.Router();
 
 const ideas = [
@@ -46,6 +47,62 @@ router.get('/:id', (req, res) => {
   res.json({
     success: true,
     data: idea,
+  });
+});
+
+router.post('/', (req, res) => {
+  const newIdea = {
+    id: ideas.length + 1,
+    text: req.body.text,
+    tag: req.body.tag,
+    username: req.body.username,
+    date: new Date().toISOString().slice(0, 10),
+  };
+
+  ideas.push(newIdea);
+
+  res.json({
+    success: true,
+    data: newIdea,
+  });
+});
+
+router.put('/:id', (req, res) => {
+  const ideaID = Number(req.params.id);
+  const idea = ideas.find((idea) => idea.id === ideaID);
+
+  if (!idea) {
+    res.status(404).json({
+      success: false,
+      error: `Idea with ID ${ideaID} was not found.`,
+    });
+  }
+
+  idea.text = req.body.text || idea.text;
+  idea.tag = req.body.tag || idea.tag;
+
+  res.json({
+    success: true,
+    data: idea,
+  });
+});
+
+router.delete('/:id', (req, res) => {
+  const ideaID = Number(req.params.id);
+  const ideaIndex = ideas.findIndex((idea) => idea.id === ideaID);
+
+  if (ideaIndex === -1) {
+    res.status(404).json({
+      success: false,
+      error: `Idea with ID ${ideaID} was not found.`,
+    });
+  }
+
+  ideas.splice(ideaIndex, 1);
+
+  res.json({
+    success: true,
+    data: {},
   });
 });
 
