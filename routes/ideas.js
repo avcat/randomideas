@@ -1,4 +1,5 @@
 import express from 'express';
+import Idea from '../models/Idea.js';
 
 const router = express.Router();
 
@@ -26,11 +27,19 @@ const ideas = [
   },
 ];
 
-router.get('/', (req, res) => {
-  res.json({
-    success: true,
-    data: ideas,
-  });
+router.get('/', async (req, res) => {
+  try {
+    const ideas = await Idea.find();
+    res.json({
+      success: true,
+      data: ideas,
+    });
+  } catch(err) {
+    res.status(500).json({
+      success: false,
+      error: 'Something went wrong.'
+    });
+  }
 });
 
 router.get('/:id', (req, res) => {
