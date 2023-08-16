@@ -1,6 +1,11 @@
 import express from 'express';
 import dotenv from 'dotenv';
 import connectDB from './config/db.js';
+import { fileURLToPath } from 'url';
+import path, { dirname } from 'path';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 dotenv.config();
 connectDB();
@@ -10,6 +15,9 @@ const paths = {
   ideas: 'ideas',
 };
 const app = express();
+
+// Static folder
+app.use(express.static(path.join(__dirname, 'public')));
 
 // Body parser middleware
 // On POST request, allows to access request.body
