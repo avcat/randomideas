@@ -1,4 +1,2 @@
-import message from './message';
+import '@fortawesome/fontawesome-free/css/all.css';
 import './css/style.css';
-
-console.log(message);
