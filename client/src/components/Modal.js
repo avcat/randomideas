@@ -5,24 +5,25 @@ class Modal {
     this.addEventListeners();
   }
 
-  addEventListeners = () => {
+  addEventListeners() {
     this._modalBtn.addEventListener('click', this.open.bind(this));
     window.addEventListener('click', this.outsideClick.bind(this));
-  };
+    document.addEventListener('closemodal', this.close.bind(this));
+  }
 
-  open = () => {
+  open() {
     this._modal.style.display = 'block';
-  };
+  }
 
-  close = () => {
+  close() {
     this._modal.style.display = 'none';
-  };
+  }
 
-  outsideClick = (e) => {
+  outsideClick(e) {
     if (e.target === this._modal) {
       this.close();
     }
-  };
+  }
 }
 
 export default Modal;
