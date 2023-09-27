@@ -11,19 +11,21 @@ class IdeaList {
     try {
       const response = await IdeasAPI.getIdeas();
       this._ideas = response.data.data;
-
-      console.info(1, 'this._ideas', this._ideas);
+      this.render();
     } catch (err) {
       console.error(err);
     }
+  }
+
+  addIdeaToFront(idea) {
+    this._ideas.push(idea);
+    this.render();
   }
 
   render() {
     if (!this._ideaListEL) {
       return `<strong>Could not find #idea-list</strong>`;
     }
-
-    console.info(2, 'this._ideas', this._ideas);
 
     const ideasHtml = this._ideas
       .map((idea) => {
@@ -44,8 +46,6 @@ class IdeaList {
       `;
       })
       .join('');
-
-    console.info('ideasHtml', ideasHtml);
 
     this._ideaListEL.innerHTML = ideasHtml;
   }
