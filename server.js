@@ -18,6 +18,7 @@ const app = express();
 
 // Static folder
 app.use(express.static(path.join(__dirname, 'public')));
+console.info(path.join(__dirname, 'public'));
 
 // Body parser middleware
 // On POST request, allows to access request.body
@@ -25,7 +26,7 @@ app.use(express.json());
 app.use(
   express.urlencoded({
     extended: false,
-  })
+  }),
 );
 
 // Establishing basic routes
@@ -36,19 +37,19 @@ app.get('/', (req, res) => {
 app.listen(port, () => {
   console.group('\u001b[1;34m > Server Listening');
   console.info(
-    `\t * The project is working on port: http://localhost:${port}/`
+    `\t * The project is working on port: http://localhost:${port}/`,
   );
   console.info(
-    `\t * Find the ideas on: http://localhost:${port}/${paths.ideas}`
+    `\t * Find the ideas on: http://localhost:${port}/${paths.ideas}`,
   );
   console.info(
-    `\t * Find a specific ID, f.e.: http://localhost:${port}/${paths.ideas}/1`
+    `\t * Find a specific ID, f.e.: http://localhost:${port}/${paths.ideas}/1`,
   );
   console.info(
-    `\t * Add a new idea at http://localhost:${port}/${paths.ideas}. F.e.: {"text": "Some thoughts on unlocking doors", "tag":"Inventions", "username":"BlackWidow"}`
+    `\t * Add a new idea at http://localhost:${port}/${paths.ideas}. F.e.: {"text": "Some thoughts on unlocking doors", "tag":"Inventions", "username":"BlackWidow"}`,
   );
   console.info(
-    `\t * Change text or tag of an idea at http://localhost:${port}/${paths.ideas}/<id>. F.e.: {"text": "Some thoughts on unlocking doors", "tag":"Inventions"}`
+    `\t * Change text or tag of an idea at http://localhost:${port}/${paths.ideas}/<id>. F.e.: {"text": "Some thoughts on unlocking doors", "tag":"Inventions"}`,
   );
   console.groupEnd();
 });

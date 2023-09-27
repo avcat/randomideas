@@ -10,10 +10,10 @@ router.get('/', async (req, res) => {
       success: true,
       data: ideas,
     });
-  } catch(err) {
+  } catch (err) {
     res.status(500).json({
       success: false,
-      error: 'Something went wrong.'
+      error: 'Something went wrong.',
     });
     console.error(err);
   }
@@ -28,10 +28,10 @@ router.get('/:id', async (req, res) => {
       success: true,
       data: idea,
     });
-  } catch(err) {
+  } catch (err) {
     res.status(500).json({
       success: false,
-      error: `Something went wrong. Idea with ID ${ideaID} was not found.`
+      error: `Something went wrong. Idea with ID ${ideaID} was not found.`,
     });
     console.error(err);
   }
@@ -50,13 +50,13 @@ router.post('/', async (req, res) => {
       success: true,
       data: savedIdea,
     });
-  } catch(err) {
+  } catch (err) {
     res.status(500).json({
       success: false,
       error: 'Something went wrong',
     });
     console.error(err);
-  }  
+  }
 });
 
 router.put('/:id', async (req, res) => {
@@ -64,26 +64,26 @@ router.put('/:id', async (req, res) => {
 
   try {
     const updatedIdea = await Idea.findByIdAndUpdate(
-      ideaID, 
+      ideaID,
       {
         $set: {
           text: req.body.text || idea.text,
-          tag: req.body.tag || idea.tag
-        }
+          tag: req.body.tag || idea.tag,
+        },
       },
       {
-        new: true
-      }
+        new: true,
+      },
     );
-  
+
     res.json({
       success: true,
       data: updatedIdea,
     });
-  } catch(err) {
+  } catch (err) {
     res.status(500).json({
       success: false,
-      error: `Idea with ID ${ideaID} was not found.`
+      error: `Idea with ID ${ideaID} was not found.`,
     });
     console.error(err);
   }
@@ -99,7 +99,7 @@ router.delete('/:id', async (req, res) => {
       success: true,
       data: {},
     });
-  } catch(err) {
+  } catch (err) {
     res.status(500).json({
       success: false,
       error: `Idea with ID ${ideaID} was not found.`,

@@ -1,5 +1,6 @@
 class IdeaForm {
   constructor() {
+    this._form = null;
     this._formModal = document.querySelector('#form-modal');
   }
 
